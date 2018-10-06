@@ -32,16 +32,4 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
-# ================ #
-# iOS build folder #
-# ================ #
-iOSEscape14/
-#==================#
-# Project Specific #
-#==================#
-*/Icon\r.meta
-Icon?
-Assets/Plugins/UnityPurchasing/Icons.meta
-build_info.txt
-escape14.apk
-iOS_E14
+
