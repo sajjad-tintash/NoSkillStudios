@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameButton : MonoBehaviour {
 
-    public GameManager.World _interactionWorld;
+    public GameController.World _interactionWorld;
     public bool _on = false;
 
     protected virtual void Awake ()

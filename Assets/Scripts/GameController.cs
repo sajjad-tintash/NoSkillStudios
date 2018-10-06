@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 
-public class GameManager : MonoBehaviour {
+public class GameController : MonoBehaviour {
 
     public enum World
     {
@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour {
         MUTATED
     }
 
-    public PlayerPlatformerController _normalPlayerController;
-    public PlayerPlatformerController _mutatedPlayerController;
+    public static bool CONTROLS_ENABLED = true;
+
+    public PlayerPlatformerController _normalPlayerPlatformController;
+    public PlayerPlatformerController _mutatedPlayerPlatformController;
 
     public PostProcessingBehaviour _normalCameraPostProcessing;
     public PostProcessingBehaviour _mutatedCameraPostProcessing;
@@ -23,9 +25,12 @@ public class GameManager : MonoBehaviour {
     private PostProcessingProfile _normalCameraPostProcessingProfile;
     private PostProcessingProfile _mutatedCameraPostProcessingProfile;
 
+    private PlayerController _normalPlayerController;
+    private PlayerController _mutatedPlayerController;
+
     public World _currentWorld;
 
-    public static GameManager instance;
+    public static GameController instance;
 
     private void Awake()
     {
@@ -43,6 +48,9 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _currentWorld = ActivateWorld(World.NORMAL);
+
+        _normalPlayerController = _normalPlayerPlatformController.GetComponent<PlayerController>();
+        _mutatedPlayerController = _mutatedPlayerPlatformController.GetComponent<PlayerController>();
 
         _normalCameraController.Init();
         _mutatedCameraController.Init();
@@ -70,14 +78,14 @@ public class GameManager : MonoBehaviour {
         switch (world)
         {
             case World.MUTATED:
-                _normalPlayerController.enabled = false;
-                _mutatedPlayerController.enabled = true;
+                _normalPlayerPlatformController.enabled = false;
+                _mutatedPlayerPlatformController.enabled = true;
                 MakeWorldGreyScale(World.NORMAL);
                 break;
 
             case World.NORMAL:
-                _normalPlayerController.enabled = true;
-                _mutatedPlayerController.enabled = false;
+                _normalPlayerPlatformController.enabled = true;
+                _mutatedPlayerPlatformController.enabled = false;
                 MakeWorldGreyScale(World.MUTATED);
                 break;
         }
@@ -130,5 +138,18 @@ public class GameManager : MonoBehaviour {
     public World GetCurrent ()
     {
         return _currentWorld;
+    }
+
+    public void CheckWinCondition ()
+    {
+        if (_normalPlayerController._mutationLevel == _mutatedPlayerController._mutationLevel)
+        {
+            LevelWon();
+        }
+    }
+
+    public void LevelWon ()
+    {
+        Debug.Log("Level Won");
     }
 }

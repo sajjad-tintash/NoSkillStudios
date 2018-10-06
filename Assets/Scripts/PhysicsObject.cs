@@ -36,7 +36,10 @@ public class PhysicsObject : MonoBehaviour
     void Update()
     {
         targetVelocity = Vector2.zero;
-        ComputeVelocity();
+        if (GameController.CONTROLS_ENABLED)
+        {
+            ComputeVelocity();
+        }
     }
 
     protected virtual void ComputeVelocity()

@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public GameButton _linkedButton = null;
-    public GameManager.World _world;
+    public GameController.World _world;
 
     public Sprite[] _centreSprites;
     public Sprite[] _rightSprites;
@@ -34,6 +34,22 @@ public class PlayerController : MonoBehaviour
         {
             _linkedButton = collision.GetComponent<GameButton>();
         }
+        else if (collision.gameObject.tag == "Candy")
+        {
+            Candy candy = collision.GetComponent<Candy>();
+            if (candy._increaseMutation)
+            {
+                MutateUp();
+            }
+            else 
+            {
+                MutateDown();
+            }
+
+            candy.Disable();
+
+            GameController.instance.CheckWinCondition();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -43,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     public void ActionKeyPressedHandler ()
     {
-        if (_linkedButton != null && GameManager.instance._currentWorld == _world)
+        if (_linkedButton != null && GameController.instance._currentWorld == _world)
         {
             _linkedButton.PerformAction();
         }
@@ -51,12 +67,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftCommand) ||
-            Input.GetKeyDown(KeyCode.RightCommand) ||
-            Input.GetKeyDown(KeyCode.LeftControl) || 
-            Input.GetKeyDown(KeyCode.RightControl))
+        if (GameController.CONTROLS_ENABLED)
         {
-            ActionKeyPressedHandler();
+            if (Input.GetKeyDown(KeyCode.LeftCommand) ||
+                Input.GetKeyDown(KeyCode.RightCommand) ||
+                Input.GetKeyDown(KeyCode.LeftControl) ||
+                Input.GetKeyDown(KeyCode.RightControl))
+            {
+                ActionKeyPressedHandler();
+            }
         }
     }
 
