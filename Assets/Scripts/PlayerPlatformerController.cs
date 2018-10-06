@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerPlatformerController : PhysicsObject
 {
+    public GameManager.World _world;
 
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;

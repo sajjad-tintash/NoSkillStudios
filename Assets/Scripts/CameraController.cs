@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour {
         //}
         //else Destroy (this.gameObject);
 
-        //this.enabled = false;
+        this.enabled = false;
 
         FollowingX = true;
         FollowingY = true;
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
 
 	public void Init ()
 	{
-		_mainCamera = Camera.main;
+		_mainCamera = GetComponent<Camera>();
 		
 		_min = Bounds.bounds.min;
 		_max = Bounds.bounds.max;

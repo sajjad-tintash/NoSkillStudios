@@ -25,8 +25,17 @@ public class GameManager : MonoBehaviour {
 
     private World _currentWorld;
 
+    public static GameManager instance;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+          instance = this;
+        }
+        else Destroy (this.gameObject);
+
+
         _normalCameraPostProcessingProfile = _normalCameraPostProcessing.profile;
         _mutatedCameraPostProcessingProfile = _mutatedCameraPostProcessing.profile;
     }
@@ -116,5 +125,10 @@ public class GameManager : MonoBehaviour {
                 _normalCameraPostProcessingProfile.colorGrading.settings = settings;
                 break;
         }
+    }
+
+    public World GetCurrent ()
+    {
+        return _currentWorld;
     }
 }
