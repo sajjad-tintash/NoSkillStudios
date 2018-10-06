@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mutation_Game", "Mutation_Game.csproj", "{602DDDF9-EE65-3050-F368-80EBDA459D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mutation_Game.Editor", "Mutation_Game.Editor.csproj", "{8761AC3A-0A55-CBF2-2D17-408B63BD403C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{602DDDF9-EE65-3050-F368-80EBDA459D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602DDDF9-EE65-3050-F368-80EBDA459D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602DDDF9-EE65-3050-F368-80EBDA459D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602DDDF9-EE65-3050-F368-80EBDA459D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8761AC3A-0A55-CBF2-2D17-408B63BD403C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8761AC3A-0A55-CBF2-2D17-408B63BD403C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8761AC3A-0A55-CBF2-2D17-408B63BD403C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8761AC3A-0A55-CBF2-2D17-408B63BD403C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
