@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     public GameButton _linkedButton = null;
     public GameController.World _world;
 
+    public GameObject[] _progressBars;
+
     public Sprite[] _centreSprites;
     public Sprite[] _rightSprites;
     public Sprite[] _leftSprites;
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         ChangeSprite();
+
+        UpdateProgressBar();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
         _mutationLevel = 0;
         _currentDirection = PlayerPlatformerController.Direction.Centre;
         ChangeSprite();
+        UpdateProgressBar();
     }
 
     public void MutateUp ()
@@ -95,6 +100,8 @@ public class PlayerController : MonoBehaviour
             _mutationLevel = 0;
         else if (_mutationLevel > 6)
             _mutationLevel = 6;
+
+        UpdateProgressBar();
     }
 
     public void MutateDown () 
@@ -105,6 +112,19 @@ public class PlayerController : MonoBehaviour
             _mutationLevel = 0;
         else if (_mutationLevel > 6)
             _mutationLevel = 6;
+
+        UpdateProgressBar();
+    }
+
+    public void UpdateProgressBar ()
+    {
+        for (int i = 0; i < _progressBars.Length; i++)
+        {
+            if (i <= _mutationLevel)
+                _progressBars[i].gameObject.SetActive(true);
+            else
+                _progressBars[i].gameObject.SetActive(false);
+        }
     }
 
     public void ChangeDirection (PlayerPlatformerController.Direction direction)
