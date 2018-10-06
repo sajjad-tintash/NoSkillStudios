@@ -77,7 +77,16 @@ public class PhysicsObject : MonoBehaviour
             hitBufferList.Clear();
             for (int i = 0; i < count; i++)
             {
-                hitBufferList.Add(hitBuffer[i]);
+                if (hitBuffer[i].collider.gameObject.tag == "Box")
+                {
+                    if (Mathf.Abs(hitBuffer[i].transform.position.x - transform.position.x) < hitBuffer[i].collider.bounds.extents.x) {
+                        hitBufferList.Add(hitBuffer[i]);
+                    }
+                }
+                else
+                {
+                    hitBufferList.Add(hitBuffer[i]);
+                }
             }
 
             for (int i = 0; i < hitBufferList.Count; i++)
