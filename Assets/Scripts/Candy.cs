@@ -4,6 +4,7 @@ using System.Collections;
 public class Candy : MonoBehaviour
 {
     public bool _increaseMutation;
+    public float rotateSpeed = 10f;
 
     public void Disable()
     {
@@ -13,5 +14,15 @@ public class Candy : MonoBehaviour
     public void Reset()
     {
         gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        Rotate();
+    }
+
+    private void Rotate ()
+    {
+        transform.Rotate(0, 0, Time.deltaTime * rotateSpeed, Space.Self);
     }
 }

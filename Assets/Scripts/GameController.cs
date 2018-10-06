@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.PostProcessing;
 
 public class GameController : MonoBehaviour {
@@ -21,6 +19,11 @@ public class GameController : MonoBehaviour {
 
     public CameraController _normalCameraController;
     public CameraController _mutatedCameraController;
+
+    public Level _levelObject;
+    public GameObject _mainCanvas;
+    public GameObject _normalProgressBar;
+    public GameObject _mutatedProgressBar;
 
     private PostProcessingProfile _normalCameraPostProcessingProfile;
     private PostProcessingProfile _mutatedCameraPostProcessingProfile;
@@ -47,14 +50,30 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _currentWorld = ActivateWorld(World.NORMAL);
-
         _normalPlayerController = _normalPlayerPlatformController.GetComponent<PlayerController>();
         _mutatedPlayerController = _mutatedPlayerPlatformController.GetComponent<PlayerController>();
 
+        MakeWorldColored(World.MUTATED);
+        MakeWorldColored(World.NORMAL);
+	}
+
+    public void PlayButtonHandler ()
+    {
+        StartGame();
+    }
+
+    void StartGame ()
+    {
+        _normalProgressBar.SetActive(true);
+        _mutatedProgressBar.SetActive(true);
+        _levelObject.gameObject.SetActive(true);
+        _mainCanvas.SetActive(false);
+
+        _currentWorld = ActivateWorld(World.NORMAL);
+
         _normalCameraController.Init();
         _mutatedCameraController.Init();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

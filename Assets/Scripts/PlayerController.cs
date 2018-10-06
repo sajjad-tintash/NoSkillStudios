@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
 
             GameController.instance.CheckWinCondition();
         }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            Reset();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -86,10 +90,10 @@ public class PlayerController : MonoBehaviour
     public void Reset()
     {
         transform.position = _initialPosition;
-        _mutationLevel = 0;
+        //_mutationLevel = 0;
         _currentDirection = PlayerPlatformerController.Direction.Centre;
-        ChangeSprite();
-        UpdateProgressBar();
+        //ChangeSprite();
+        //UpdateProgressBar();
     }
 
     public void MutateUp ()
