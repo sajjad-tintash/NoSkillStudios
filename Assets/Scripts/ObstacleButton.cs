@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LiftButton : GameButton
+public class ObstacleButton : GameButton
 {
-    public Lift _lift;
+    public Obstacle _obstacle;
 
     public override void TurnOn()
     {
-        _lift.Move();
+        _obstacle.Move();
         base.TurnOn();
     }
 
     public override void TurnOff()
     {
-        _lift.Move();
+        _obstacle.Move();
         base.TurnOff();
     }
 }
