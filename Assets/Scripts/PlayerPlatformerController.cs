@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerPlatformerController : PhysicsObject
 {
+    public enum Direction {
+        Centre,
+        Left,
+        Right
+    }
+
     public GameManager.World _world;
 
     public float maxSpeed = 7;
@@ -12,10 +18,13 @@ public class PlayerPlatformerController : PhysicsObject
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    private PlayerController _playerController;
+
     // Use this for initialization
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerController = GetComponent<PlayerController>();
         //animator = GetComponent<Animator>();
     }
 
@@ -37,14 +46,18 @@ public class PlayerPlatformerController : PhysicsObject
             }
         }
 
-        bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
-        if (flipSprite)
+        if (move.x > 0.01f)
         {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
+            _playerController.ChangeDirection(Direction.Right);
         }
-
-        //animator.SetBool("grounded", grounded);
-        //animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        else if (move.x < -0.01f)
+        {
+            _playerController.ChangeDirection(Direction.Left);
+        }
+        else 
+        {   
+            _playerController.ChangeDirection(Direction.Centre);
+        }
 
         targetVelocity = move * maxSpeed;
     }

@@ -5,6 +5,6 @@ public static class Utility
 {
     public static float SpeedToTime (float distance, float speed) 
     {
-        return speed / distance;
+        return distance / speed;
     }
 }

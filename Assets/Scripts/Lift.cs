@@ -20,13 +20,15 @@ public class Lift : Obstacle
 
         if (_atStart)
         {
-            LeanTween.move(gameObject, _endPosition, Utility.SpeedToTime(Vector2.Distance(transform.position, _endPosition),
+            float distance = Vector2.Distance(transform.localPosition, _endPosition);
+            LeanTween.move(gameObject, _endPosition, Utility.SpeedToTime(distance,
                                                                          Constants.LiftSpeed));
             _atStart = false;
         }
         else 
         {
-            LeanTween.move(gameObject, _startPosition, Utility.SpeedToTime(Vector2.Distance(transform.position, _startPosition),
+            float distance = Vector2.Distance(transform.localPosition, _startPosition);
+            LeanTween.move(gameObject, _startPosition, Utility.SpeedToTime(distance,
                                                                          Constants.LiftSpeed));
             _atStart = true;
         }

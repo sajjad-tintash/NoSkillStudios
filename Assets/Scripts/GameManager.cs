@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
     private PostProcessingProfile _normalCameraPostProcessingProfile;
     private PostProcessingProfile _mutatedCameraPostProcessingProfile;
 
-    private World _currentWorld;
+    public World _currentWorld;
 
     public static GameManager instance;
 
