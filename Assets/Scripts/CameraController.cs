@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour {
 	_min,
 	_max;
 	
-	private Camera _mainCamera;
+	public Camera _mainCamera;
 
 	//public static CameraController instance = null;
 

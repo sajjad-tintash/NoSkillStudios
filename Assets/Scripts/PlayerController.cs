@@ -52,7 +52,11 @@ public class PlayerController : MonoBehaviour
 
             candy.Disable();
 
-            GameController.instance.CheckWinCondition();
+            if (GameController.instance.CheckWinCondition())
+            {
+                _currentDirection = PlayerPlatformerController.Direction.Centre;
+                ChangeSprite();
+            }
         }
         else if (collision.gameObject.tag == "Enemy")
         {
