@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Vector2 _initialPosition;
 
+    private Vector2 _resetPosition;
+
     private PlayerPlatformerController.Direction _currentDirection = PlayerPlatformerController.Direction.Centre;
 
     private void Awake()
     {
         _initialPosition = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _resetPosition = _initialPosition;
     }
 
     private void Start()
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Button")
         {
             _linkedButton = collision.GetComponent<GameButton>();
+            _resetPosition = _linkedButton.transform.position;
         }
         else if (collision.gameObject.tag == "Candy")
         {
@@ -57,6 +61,8 @@ public class PlayerController : MonoBehaviour
                 _currentDirection = PlayerPlatformerController.Direction.Centre;
                 ChangeSprite();
             }
+
+            _resetPosition = candy.transform.position;
         }
         else if (collision.gameObject.tag == "Enemy")
         {
@@ -93,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     public void Reset()
     {
-        transform.position = _initialPosition;
+        transform.position = _resetPosition;
         //_mutationLevel = 0;
         _currentDirection = PlayerPlatformerController.Direction.Centre;
         //ChangeSprite();

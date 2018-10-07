@@ -11,7 +11,7 @@ public class Lift : Obstacle
     protected override void Start()
     {
         base.Start();
-        transform.position = _startPosition;
+        transform.localPosition = _startPosition;
     }
 
     public override void Move()
@@ -21,14 +21,14 @@ public class Lift : Obstacle
         if (_atStart)
         {
             float distance = Vector2.Distance(transform.localPosition, _endPosition);
-            LeanTween.move(gameObject, _endPosition, Utility.SpeedToTime(distance,
+            LeanTween.moveLocal(gameObject, _endPosition, Utility.SpeedToTime(distance,
                                                                          Constants.LiftSpeed));
             _atStart = false;
         }
         else 
         {
             float distance = Vector2.Distance(transform.localPosition, _startPosition);
-            LeanTween.move(gameObject, _startPosition, Utility.SpeedToTime(distance,
+            LeanTween.moveLocal(gameObject, _startPosition, Utility.SpeedToTime(distance,
                                                                          Constants.LiftSpeed));
             _atStart = true;
         }
