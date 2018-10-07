@@ -24,8 +24,13 @@ public class GameController : MonoBehaviour {
 
     public Level _levelObject;
     public GameObject _mainCanvas;
+    public GameObject _startScreen;
+    public GameObject _howToPlayScreen;
     public GameObject _normalProgressBar;
     public GameObject _mutatedProgressBar;
+
+    public GameObject _controlText;
+    public GameObject _hintText;
 
     private PostProcessingProfile _normalCameraPostProcessingProfile;
     private PostProcessingProfile _mutatedCameraPostProcessingProfile;
@@ -34,6 +39,8 @@ public class GameController : MonoBehaviour {
     private PlayerController _mutatedPlayerController;
 
     public World _currentWorld;
+
+    private bool _hintTextShowing = false;
 
     public static GameController instance;
 
@@ -61,15 +68,24 @@ public class GameController : MonoBehaviour {
 
     public void PlayButtonHandler ()
     {
+        //StartGame();
+        _startScreen.SetActive(false);
+        _howToPlayScreen.SetActive(true);
+    }
+
+    public void GotItButtonHandler ()
+    {
         StartGame();
     }
 
     void StartGame ()
     {
+        //_mainCanvas.SetActive(false);
+
         _normalProgressBar.SetActive(true);
         _mutatedProgressBar.SetActive(true);
         _levelObject.gameObject.SetActive(true);
-        _mainCanvas.SetActive(false);
+        _howToPlayScreen.SetActive(false);
 
         _currentWorld = ActivateWorld(World.NORMAL);
 
@@ -112,6 +128,8 @@ public class GameController : MonoBehaviour {
         }
 
         MakeWorldColored(world);
+        HideControlText();
+        HideHintText();
 
         return world;
     }
@@ -186,6 +204,9 @@ public class GameController : MonoBehaviour {
     {
         CONTROLS_ENABLED = false;
 
+        HideControlText();
+        HideHintText();
+
         MakeWorldColored(World.MUTATED);
         MakeWorldColored(World.NORMAL);
 
@@ -254,5 +275,32 @@ public class GameController : MonoBehaviour {
         cameraX = Mathf.Lerp(_mutatedCameraFromPos.x, _camerasMidPoint.x, value);
         cameraY = Mathf.Lerp(_mutatedCameraFromPos.y, _camerasMidPoint.y, value);
         _mutatedCameraController._mainCamera.transform.position = new Vector3(cameraX, cameraY, -10f);
+    }
+
+    public void ShowHintText ()
+    {
+        if (_hintTextShowing == false)
+        {
+            _hintTextShowing = true;
+            _hintText.SetActive(true);
+            Invoke("HideHintText", 5f);
+        }
+    }
+
+    public void HideHintText ()
+    {
+        CancelInvoke("HideHintText");
+        _hintText.SetActive(false);
+        _hintTextShowing = false;
+    }
+
+    public void ShowControlText ()
+    {
+        _controlText.SetActive(true);
+    }
+
+    public void HideControlText ()
+    {
+        _controlText.SetActive(false);
     }
 }

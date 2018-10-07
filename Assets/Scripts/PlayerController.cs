@@ -40,7 +40,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Button")
         {
             _linkedButton = collision.GetComponent<GameButton>();
-            _resetPosition = _linkedButton.transform.position;
+
+            if (_linkedButton._interactionWorld == _world)
+                _resetPosition = _linkedButton.transform.position;
+
+            GameController.instance.ShowControlText();
         }
         else if (collision.gameObject.tag == "Candy")
         {
@@ -72,14 +76,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (_linkedButton != null)
+            GameController.instance.HideControlText();
+            
         _linkedButton = null;
+
     }
 
     public void ActionKeyPressedHandler ()
     {
-        if (_linkedButton != null && GameController.instance._currentWorld == _world)
+        if (_linkedButton != null)
         {
-            _linkedButton.PerformAction();
+            if (_linkedButton._interactionWorld == _world)
+            {
+                if (GameController.instance._currentWorld == _world)
+                    _linkedButton.PerformAction();
+            }
+            else
+            {
+                if (GameController.instance._currentWorld == _world)
+                    GameController.instance.ShowHintText();
+            }
         }
     }
 
