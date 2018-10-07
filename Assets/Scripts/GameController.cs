@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour {
     public GameObject _howToPlayScreen;
     public GameObject _normalProgressBar;
     public GameObject _mutatedProgressBar;
+    public GameObject _creditsScreen;
 
     public GameObject _controlText;
     public GameObject _hintText;
@@ -252,6 +253,8 @@ public class GameController : MonoBehaviour {
         Vector3 playerTweenPos = new Vector3(_camerasMidPoint.x, _camerasMidPoint.y, 0f);
         LeanTween.move(_normalPlayerController.gameObject, playerTweenPos, 2f);
         LeanTween.move(_mutatedPlayerController.gameObject, playerTweenPos, 2f);
+
+        Invoke("ShowCreditsScreen", 5f);
     }
 
     public void AnimateTweening (float value)
@@ -302,5 +305,10 @@ public class GameController : MonoBehaviour {
     public void HideControlText ()
     {
         _controlText.SetActive(false);
+    }
+
+    public void ShowCreditsScreen ()
+    {
+        _creditsScreen.SetActive(true);
     }
 }
